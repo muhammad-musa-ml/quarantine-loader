@@ -1,0 +1,33 @@
+﻿fk_against_staging                   KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
+fk_not_in                            KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
+unique_ignores_quarantine            KILLED   test_unique_keeps_the_first_row_that_passes_the_other_rules
+unique_runs_in_config_order          KILLED   test_unique_keeps_the_first_row_that_passes_the_other_rules
+unique_keeps_last                    KILLED   test_cli_writes_json_and_markdown_and_markdown_names_every_kind, test_every_injected_row_is_rejected_by_exactl
+range_without_number_guard           KILLED   test_type_catches_text_in_a_number_column_and_range_leaves_it_alone
+range_lower_bound_exclusive          KILLED   test_range_bounds_are_inclusive
+quarantined_counts_rows_not_rows     KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_row_breaking_two_rules_is_stored_twic
+date_accepts_basic_format            KILLED   test_dates_must_be_real_calendar_days
+text_columns_get_integer_affinity    KILLED   test_text_keys_keep_their_leading_zeros
+rerun_keeps_old_quarantine           KILLED   test_a_rerun_on_corrected_data_clears_the_old_quarantine
+expr_fails_unknown_results           KILLED   test_expr_fails_the_row_and_null_does_not
+compare_ignores_wrong_rules          KILLED   test_compare_reports_a_missed_row_and_a_false_quarantine
+compare_ignores_unexpected           KILLED   test_compare_reports_a_missed_row_and_a_false_quarantine
+gen_no_cascade                       KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_cascade_is_the_orders_of_rejected_custo
+gen_row_number_off_by_one            KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_null_key_is_shown_as_null_with_its_ro
+gen_unseeded                         KILLED   test_default_run_injects_faults_and_says_how_many_rows_should_be_rejected, test_same_seed_same_rows_and_other_
+load_unique_keeps_last_e2e           KILLED   test_cli_writes_json_and_markdown_and_markdown_names_every_kind, test_every_injected_row_is_rejected_by_exactl
+load_fk_against_staging_e2e          KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
+report_blocking_never_exits_1        KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_blocking_comes_first_whatever_the_rule_
+report_warn_sorted_with_blocking     KILLED   test_blocking_comes_first_whatever_the_rule_ids_sort_like
+report_null_key_prints_none          KILLED   test_a_null_key_is_shown_as_null_with_its_row_number
+report_reconcile_one_sided           KILLED   test_reconciliation_failure_is_exit_3_in_either_direction
+report_ignores_passed_rules_count    KILLED   test_rule_counts_in_the_report_are_the_injected_counts
+cli_sql_error_uncaught               KILLED   test_bad_rule_sql_exits_2
+cli_returns_0_always                 KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_module_entry_point_returns_the_exit_cod
+cli_report_file_not_written          KILLED   test_the_report_file_equals_what_is_printed
+measure_rules_not_removed            KILLED   test_summary_adds_up_the_runs_and_is_clean, test_the_rules_off_run_really_loads_bad_rows
+measure_exit_code_never_1            KILLED   test_exit_code_is_1_for_each_kind_of_mismatch, test_summary_counts_mismatches_across_runs
+measure_same_seed_every_run          KILLED   test_summary_adds_up_the_runs_and_is_clean
+measure_missed_not_summed            KILLED   test_summary_counts_mismatches_across_runs
+mockdata_command_not_wired           KILLED   test_python_dash_m_really_runs_it
+KILLED 32; 32 mutants

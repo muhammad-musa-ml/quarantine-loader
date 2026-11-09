@@ -1,0 +1,194 @@
+[
+ {
+  "name": "fk_against_staging",
+  "file": "quarantine_loader/rules.py",
+  "old": "(SELECT 1 FROM {q(parent)} p WHERE",
+  "new": "(SELECT 1 FROM {q('stg_' + parent)} p WHERE"
+ },
+ {
+  "name": "fk_not_in",
+  "file": "quarantine_loader/rules.py",
+  "old": "NOT EXISTS \"\n                f\"(SELECT 1 FROM {q(parent)} p WHERE p.{q(pcol)} = {q(stg)}.{q(col)})\"), []",
+  "new": "NOT IN \"\n                f\"(SELECT {q(pcol)} FROM {q(parent)})\"), []"
+ },
+ {
+  "name": "unique_ignores_quarantine",
+  "file": "quarantine_loader/load.py",
+  "old": "live = f\"_row NOT IN (SELECT row_no FROM quarantine WHERE entity='{ent}') AND {col} IS NOT NULL\"",
+  "new": "live = f\"{col} IS NOT NULL\""
+ },
+ {
+  "name": "unique_runs_in_config_order",
+  "file": "quarantine_loader/load.py",
+  "old": "ordered = [r for r in cfg[\"rules\"] if r[\"kind\"] != \"unique\"] + [r for r in cfg[\"rules\"] if r[\"kind\"] == \"unique\"]",
+  "new": "ordered = list(cfg[\"rules\"])"
+ },
+ {
+  "name": "unique_keeps_last",
+  "file": "quarantine_loader/load.py",
+  "old": "(SELECT MIN(_row) FROM",
+  "new": "(SELECT MAX(_row) FROM"
+ },
+ {
+  "name": "range_without_number_guard",
+  "file": "quarantine_loader/rules.py",
+  "old": "return f\"is_real({q(col)}) AND ({' OR '.join(parts)})\", params",
+  "new": "return f\"({' OR '.join(parts)})\", params"
+ },
+ {
+  "name": "range_lower_bound_exclusive",
+  "file": "quarantine_loader/rules.py",
+  "old": "parts.append(f\"CAST({q(col)} AS REAL) < ?\")",
+  "new": "parts.append(f\"CAST({q(col)} AS REAL) <= ?\")"
+ },
+ {
+  "name": "quarantined_counts_rows_not_rows",
+  "file": "quarantine_loader/load.py",
+  "old": "COUNT(DISTINCT row_no)",
+  "new": "COUNT(*)"
+ },
+ {
+  "name": "date_accepts_basic_format",
+  "file": "quarantine_loader/rules.py",
+  "old": "if not _DATE.match(v):",
+  "new": "if False:"
+ },
+ {
+  "name": "text_columns_get_integer_affinity",
+  "file": "quarantine_loader/load.py",
+  "old": "TARGET_TYPES = {\"text\": \"TEXT\"",
+  "new": "TARGET_TYPES = {\"text\": \"INTEGER\""
+ },
+ {
+  "name": "rerun_keeps_old_quarantine",
+  "file": "quarantine_loader/load.py",
+  "old": "for table in (\"quarantine\", \"rule_results\", \"entity_results\"):",
+  "new": "for table in ():"
+ },
+ {
+  "name": "expr_fails_unknown_results",
+  "file": "quarantine_loader/rules.py",
+  "old": "return f\"NOT ({rule['sql']})\", []",
+  "new": "return f\"NOT COALESCE(({rule['sql']}), 0)\", []"
+ },
+ {
+  "name": "compare_ignores_wrong_rules",
+  "file": "quarantine_loader/compare.py",
+  "old": "if k in ds.expected and got[k] != ds.expected[k]",
+  "new": "if False"
+ },
+ {
+  "name": "compare_ignores_unexpected",
+  "file": "quarantine_loader/compare.py",
+  "old": "if k not in ds.expected)",
+  "new": "if False)"
+ },
+ {
+  "name": "gen_no_cascade",
+  "file": "quarantine_loader/mockdata.py",
+  "old": "rejected.add(cust[i][0])",
+  "new": "pass"
+ },
+ {
+  "name": "gen_row_number_off_by_one",
+  "file": "quarantine_loader/mockdata.py",
+  "old": "record(kind, \"orders\", i + 1)",
+  "new": "record(kind, \"orders\", i + 2)"
+ },
+ {
+  "name": "gen_unseeded",
+  "file": "quarantine_loader/mockdata.py",
+  "old": "rng = random.Random(seed)",
+  "new": "rng = random.Random()"
+ },
+ {
+  "name": "load_unique_keeps_last_e2e",
+  "file": "quarantine_loader/load.py",
+  "old": "(SELECT MIN(_row) FROM",
+  "new": "(SELECT MAX(_row) FROM"
+ },
+ {
+  "name": "load_fk_against_staging_e2e",
+  "file": "quarantine_loader/rules.py",
+  "old": "(SELECT 1 FROM {q(parent)} p WHERE",
+  "new": "(SELECT 1 FROM {q('stg_' + parent)} p WHERE"
+ },
+ {
+  "name": "report_blocking_never_exits_1",
+  "file": "quarantine_loader/report.py",
+  "old": "elif blocking:",
+  "new": "elif False:"
+ },
+ {
+  "name": "report_warn_sorted_with_blocking",
+  "file": "quarantine_loader/report.py",
+  "old": "ORDER BY CASE severity WHEN 'blocking' THEN 0 ELSE 1 END, rule_id",
+  "new": "ORDER BY rule_id"
+ },
+ {
+  "name": "report_null_key_prints_none",
+  "file": "quarantine_loader/report.py",
+  "old": "{k if k is not None else 'null'}",
+  "new": "{k}"
+ },
+ {
+  "name": "report_reconcile_one_sided",
+  "file": "quarantine_loader/report.py",
+  "old": "ok = e[\"staged\"] == e[\"loaded\"] + e[\"quarantined\"]",
+  "new": "ok = e[\"staged\"] >= e[\"loaded\"] + e[\"quarantined\"]"
+ },
+ {
+  "name": "report_ignores_passed_rules_count",
+  "file": "quarantine_loader/report.py",
+  "old": "WHERE failed_rows = 0",
+  "new": "WHERE failed_rows >= 0"
+ },
+ {
+  "name": "cli_sql_error_uncaught",
+  "file": "quarantine_loader/__main__.py",
+  "old": "(OSError, ValueError, sqlite3.Error)",
+  "new": "(OSError, ValueError)"
+ },
+ {
+  "name": "cli_returns_0_always",
+  "file": "quarantine_loader/__main__.py",
+  "old": "    return code\n",
+  "new": "    return 0\n"
+ },
+ {
+  "name": "cli_report_file_not_written",
+  "file": "quarantine_loader/__main__.py",
+  "old": "    if args.report:\n        Path(args.report).write_text(text, encoding=\"utf-8\", newline=\"\\n\")\n",
+  "new": ""
+ },
+ {
+  "name": "measure_rules_not_removed",
+  "file": "quarantine_loader/measure.py",
+  "old": "bare = [dict(copy.deepcopy(c), rules=[]) for c in configs]",
+  "new": "bare = [copy.deepcopy(c) for c in configs]"
+ },
+ {
+  "name": "measure_exit_code_never_1",
+  "file": "quarantine_loader/measure.py",
+  "old": "return 1 if s[\"missed\"] + s[\"wrong_rules\"] + s[\"unexpected\"] else 0",
+  "new": "return 0"
+ },
+ {
+  "name": "measure_same_seed_every_run",
+  "file": "quarantine_loader/measure.py",
+  "old": "for s in range(1, seeds + 1)]",
+  "new": "for s in [1] * seeds]"
+ },
+ {
+  "name": "measure_missed_not_summed",
+  "file": "quarantine_loader/measure.py",
+  "old": "\"missed\": sum(len(r[\"compare\"][\"missed\"]) for r in runs),",
+  "new": "\"missed\": 0,"
+ },
+ {
+  "name": "mockdata_command_not_wired",
+  "file": "quarantine_loader/mockdata.py",
+  "old": "if __name__ == \"__main__\":\n    main()\n",
+  "new": ""
+ }
+]
