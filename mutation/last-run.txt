@@ -1,4 +1,4 @@
-﻿fk_against_staging                   KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
+fk_against_staging                   KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
 fk_not_in                            KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
 unique_ignores_quarantine            KILLED   test_unique_keeps_the_first_row_that_passes_the_other_rules
 unique_runs_in_config_order          KILLED   test_unique_keeps_the_first_row_that_passes_the_other_rules
@@ -14,7 +14,7 @@ compare_ignores_wrong_rules          KILLED   test_compare_reports_a_missed_row_
 compare_ignores_unexpected           KILLED   test_compare_reports_a_missed_row_and_a_false_quarantine
 gen_no_cascade                       KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_cascade_is_the_orders_of_rejected_custo
 gen_row_number_off_by_one            KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_null_key_is_shown_as_null_with_its_ro
-gen_unseeded                         KILLED   test_default_run_injects_faults_and_says_how_many_rows_should_be_rejected, test_same_seed_same_rows_and_other_
+gen_unseeded                         KILLED   test_compare_reports_a_missed_row_and_a_false_quarantine, test_default_run_injects_faults_and_says_how_many_ro
 load_unique_keeps_last_e2e           KILLED   test_cli_writes_json_and_markdown_and_markdown_names_every_kind, test_every_injected_row_is_rejected_by_exactl
 load_fk_against_staging_e2e          KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_a_child_of_a_quarantined_parent_is_an_o
 report_blocking_never_exits_1        KILLED   test_a_blocking_rule_failing_exits_1_and_still_finishes_the_load, test_blocking_comes_first_whatever_the_rule_

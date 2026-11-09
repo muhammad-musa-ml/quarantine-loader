@@ -57,7 +57,7 @@
    "total": 5001,
    "exact": 5001,
    "per_seed": {
-    "median": 251.0,
+    "median": 251,
     "min": 214,
     "max": 288
    }
@@ -70,16 +70,21 @@
    "min": 463,
    "max": 533
   },
-  "bad_orders_per_seed": {
+  "orders_to_reject_per_seed": {
    "median": 421.5,
    "min": 388,
    "max": 458
   },
+  "orders_with_own_fault_per_seed": {
+   "median": 175,
+   "min": 175,
+   "max": 175
+  },
   "no_rules_orders_loaded_equals_staged": true,
   "load_seconds": {
-   "median": 1.593,
-   "min": 1.28,
-   "max": 1.894
+   "median": 1.485,
+   "min": 0.938,
+   "max": 1.828
   }
  },
  "runs": [
@@ -97,7 +102,8 @@
     "customers": 75,
     "orders": 394
    },
-   "bad_orders_in_input": 394,
+   "orders_to_reject": 394,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -164,7 +170,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.447
+   "load_seconds": 0.938
   },
   {
    "seed": 2,
@@ -180,7 +186,8 @@
     "customers": 75,
     "orders": 410
    },
-   "bad_orders_in_input": 410,
+   "orders_to_reject": 410,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -247,7 +254,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.463
+   "load_seconds": 1.25
   },
   {
    "seed": 3,
@@ -263,7 +270,8 @@
     "customers": 75,
     "orders": 427
    },
-   "bad_orders_in_input": 427,
+   "orders_to_reject": 427,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -330,7 +338,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.32
+   "load_seconds": 1.422
   },
   {
    "seed": 4,
@@ -346,7 +354,8 @@
     "customers": 75,
     "orders": 421
    },
-   "bad_orders_in_input": 421,
+   "orders_to_reject": 421,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -413,7 +422,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.485
+   "load_seconds": 1.391
   },
   {
    "seed": 5,
@@ -429,7 +438,8 @@
     "customers": 75,
     "orders": 450
    },
-   "bad_orders_in_input": 450,
+   "orders_to_reject": 450,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -496,7 +506,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.626
+   "load_seconds": 1.453
   },
   {
    "seed": 6,
@@ -512,7 +522,8 @@
     "customers": 75,
     "orders": 422
    },
-   "bad_orders_in_input": 422,
+   "orders_to_reject": 422,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -579,7 +590,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.692
+   "load_seconds": 1.516
   },
   {
    "seed": 7,
@@ -595,7 +606,8 @@
     "customers": 75,
     "orders": 400
    },
-   "bad_orders_in_input": 400,
+   "orders_to_reject": 400,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -662,7 +674,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.433
+   "load_seconds": 1.312
   },
   {
    "seed": 8,
@@ -678,7 +690,8 @@
     "customers": 75,
     "orders": 438
    },
-   "bad_orders_in_input": 438,
+   "orders_to_reject": 438,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -745,7 +758,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.622
+   "load_seconds": 1.781
   },
   {
    "seed": 9,
@@ -761,7 +774,8 @@
     "customers": 75,
     "orders": 388
    },
-   "bad_orders_in_input": 388,
+   "orders_to_reject": 388,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -828,7 +842,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.546
+   "load_seconds": 1.547
   },
   {
    "seed": 10,
@@ -844,7 +858,8 @@
     "customers": 75,
     "orders": 417
    },
-   "bad_orders_in_input": 417,
+   "orders_to_reject": 417,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -911,7 +926,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.595
+   "load_seconds": 1.703
   },
   {
    "seed": 11,
@@ -927,7 +942,8 @@
     "customers": 75,
     "orders": 421
    },
-   "bad_orders_in_input": 421,
+   "orders_to_reject": 421,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -994,7 +1010,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.743
+   "load_seconds": 1.688
   },
   {
    "seed": 12,
@@ -1010,7 +1026,8 @@
     "customers": 75,
     "orders": 410
    },
-   "bad_orders_in_input": 410,
+   "orders_to_reject": 410,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1077,7 +1094,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.591
+   "load_seconds": 1.547
   },
   {
    "seed": 13,
@@ -1093,7 +1110,8 @@
     "customers": 75,
     "orders": 458
    },
-   "bad_orders_in_input": 458,
+   "orders_to_reject": 458,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1160,7 +1178,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.796
+   "load_seconds": 1.641
   },
   {
    "seed": 14,
@@ -1176,7 +1194,8 @@
     "customers": 75,
     "orders": 409
    },
-   "bad_orders_in_input": 409,
+   "orders_to_reject": 409,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1243,7 +1262,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.822
+   "load_seconds": 1.391
   },
   {
    "seed": 15,
@@ -1259,7 +1278,8 @@
     "customers": 75,
     "orders": 454
    },
-   "bad_orders_in_input": 454,
+   "orders_to_reject": 454,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1326,7 +1346,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.894
+   "load_seconds": 1.359
   },
   {
    "seed": 16,
@@ -1342,7 +1362,8 @@
     "customers": 75,
     "orders": 403
    },
-   "bad_orders_in_input": 403,
+   "orders_to_reject": 403,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1409,7 +1430,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.567
+   "load_seconds": 1.828
   },
   {
    "seed": 17,
@@ -1425,7 +1446,8 @@
     "customers": 75,
     "orders": 426
    },
-   "bad_orders_in_input": 426,
+   "orders_to_reject": 426,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1492,7 +1514,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.75
+   "load_seconds": 1.641
   },
   {
    "seed": 18,
@@ -1508,7 +1530,8 @@
     "customers": 75,
     "orders": 430
    },
-   "bad_orders_in_input": 430,
+   "orders_to_reject": 430,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1575,7 +1598,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.663
+   "load_seconds": 1.641
   },
   {
    "seed": 19,
@@ -1591,7 +1614,8 @@
     "customers": 75,
     "orders": 445
    },
-   "bad_orders_in_input": 445,
+   "orders_to_reject": 445,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1658,7 +1682,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.561
+   "load_seconds": 1.438
   },
   {
    "seed": 20,
@@ -1674,7 +1698,8 @@
     "customers": 75,
     "orders": 422
    },
-   "bad_orders_in_input": 422,
+   "orders_to_reject": 422,
+   "orders_with_own_fault": 175,
    "no_rules_loaded_orders": 10025,
    "no_rules_staged_orders": 10025,
    "compare": {
@@ -1741,7 +1766,7 @@
     "missed": [],
     "wrong_rules": []
    },
-   "load_seconds": 1.28
+   "load_seconds": 1.281
   }
  ]
 }

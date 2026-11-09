@@ -13,8 +13,8 @@
 | customer_bad_signup | 500 | 500 | 500 |
 | customer_duplicate | 500 | 500 | 500 |
 
-Orders whose customer was rejected: 5001 in all, 251.0 per seed (range 214-288); 5001 were rejected by the foreign-key rule.
+Orders whose customer was rejected: 5001 in all, 251 per seed (range 214-288); 5001 were rejected by the foreign-key rule.
 Expected rows not rejected: 0. Rejected by the wrong rules: 0. Rejected but not expected: 0.
-Rows quarantined per seed: median 496.5 (range 463-533); bad orders in the input per seed: median 421.5 (range 388-458).
+Rows quarantined per seed: median 496.5 (range 463-533); orders that should be rejected per seed: median 421.5 (range 388-458), of which orders with a fault of their own: median 175 (range 175-175).
 With the rules removed, orders loaded equalled orders staged in every seed: True.
-Load and check time per seed: median 1.593 s (range 1.28-1.894 s).
+Load and check CPU time per seed: median 1.485 s (range 0.938-1.828 s).

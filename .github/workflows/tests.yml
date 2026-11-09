@@ -1,0 +1,21 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m unittest discover -s tests -t .
+      - name: clean data must load with exit 0
+        run: |
+          python -m quarantine_loader.mockdata --seed 1 --clean --out clean
+          python -m quarantine_loader --config config --data clean
+      - name: faulty data must load with exit 1
+        run: |
+          python -m quarantine_loader.mockdata --seed 1 --out faulty
+          python -m quarantine_loader --config config --data faulty --report report.md || test $? -eq 1
+      - name: rules catch every injected fault over five seeds
+        run: python -m quarantine_loader.measure --seeds 5 --out "$RUNNER_TEMP/results"

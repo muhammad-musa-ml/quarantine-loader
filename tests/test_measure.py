@@ -23,13 +23,14 @@ class Measure(unittest.TestCase):
         for r in runs:
             for e in r["rows_staged"]:
                 self.assertEqual(r["rows_staged"][e], r["rows_loaded"][e] + r["rows_quarantined"][e])
-            self.assertEqual(r["rows_quarantined"]["orders"], r["bad_orders_in_input"])
+            self.assertEqual(r["rows_quarantined"]["orders"], r["orders_to_reject"])
 
     def test_the_rules_off_run_really_loads_bad_rows(self):
         runs, _ = measure.measure(seeds=1, customers=200, orders=1000, per_kind=6)
         r = runs[0]
         self.assertEqual(r["no_rules_loaded_orders"], r["rows_staged"]["orders"])
-        self.assertGreater(r["bad_orders_in_input"], 0)
+        self.assertEqual(r["orders_with_own_fault"], 7 * 6)
+        self.assertGreaterEqual(r["orders_to_reject"], r["orders_with_own_fault"])
         self.assertLess(r["rows_loaded"]["orders"], r["no_rules_loaded_orders"])
 
     def test_cli_writes_json_and_markdown_and_markdown_names_every_kind(self):

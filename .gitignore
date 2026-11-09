@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+*.db
+clean/
+faulty/
+data/
+report.md

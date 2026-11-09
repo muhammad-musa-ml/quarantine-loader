@@ -23,9 +23,10 @@ def one_seed(seed, configs, customers, orders, per_kind):
     with tempfile.TemporaryDirectory() as d:
         mockdata.write_csv(ds, d)
         conn = load.connect()
-        t0 = time.perf_counter()
+        # CPU time of this process: wall time swings when the machine is shared
+        t0 = time.process_time()
         res = load.run(conn, configs, d)
-        seconds = time.perf_counter() - t0
+        seconds = time.process_time() - t0
         cmp = compare.compare(conn, ds)
         conn.close()
         # the same load with every rule removed: what a load that only counts rows does
@@ -33,13 +34,16 @@ def one_seed(seed, configs, customers, orders, per_kind):
         conn = load.connect()
         bare_res = load.run(conn, bare, d)
         conn.close()
-    bad_orders = sum(1 for e, _ in ds.expected if e == "orders")
+    # orders to reject = orders with a fault of their own plus the orders of a rejected customer
+    to_reject = sum(1 for e, _ in ds.expected if e == "orders")
+    own_fault = sum(len(rows) for k, rows in ds.injected.items() if mockdata.KINDS[k][0] == "orders")
     return {
         "seed": seed,
         "rows_staged": {r["entity"]: r["staged"] for r in res},
         "rows_loaded": {r["entity"]: r["loaded"] for r in res},
         "rows_quarantined": {r["entity"]: r["quarantined"] for r in res},
-        "bad_orders_in_input": bad_orders,
+        "orders_to_reject": to_reject,
+        "orders_with_own_fault": own_fault,
         "no_rules_loaded_orders": next(r["loaded"] for r in bare_res if r["entity"] == "orders"),
         "no_rules_staged_orders": next(r["staged"] for r in bare_res if r["entity"] == "orders"),
         "compare": cmp,
@@ -48,7 +52,10 @@ def one_seed(seed, configs, customers, orders, per_kind):
 
 
 def spread(values):
-    return {"median": statistics.median(values), "min": min(values), "max": max(values)}
+    med = statistics.median(values)
+    if isinstance(med, float) and med.is_integer():
+        med = int(med)
+    return {"median": round(med, 3), "min": min(values), "max": max(values)}
 
 
 def summarize(runs):
@@ -72,7 +79,8 @@ def summarize(runs):
         "wrong_rules": sum(len(r["compare"]["wrong_rules"]) for r in runs),
         "unexpected": sum(len(r["compare"]["unexpected"]) for r in runs),
         "rows_quarantined_per_seed": spread([sum(r["rows_quarantined"].values()) for r in runs]),
-        "bad_orders_per_seed": spread([r["bad_orders_in_input"] for r in runs]),
+        "orders_to_reject_per_seed": spread([r["orders_to_reject"] for r in runs]),
+        "orders_with_own_fault_per_seed": spread([r["orders_with_own_fault"] for r in runs]),
         "no_rules_orders_loaded_equals_staged": all(
             r["no_rules_loaded_orders"] == r["no_rules_staged_orders"] for r in runs),
         "load_seconds": spread([r["load_seconds"] for r in runs]),
@@ -98,10 +106,12 @@ def markdown(s, customers, orders, per_kind):
         f"Rejected but not expected: {s['unexpected']}.",
         f"Rows quarantined per seed: median {s['rows_quarantined_per_seed']['median']} "
         f"(range {s['rows_quarantined_per_seed']['min']}-{s['rows_quarantined_per_seed']['max']}); "
-        f"bad orders in the input per seed: median {s['bad_orders_per_seed']['median']} "
-        f"(range {s['bad_orders_per_seed']['min']}-{s['bad_orders_per_seed']['max']}).",
+        f"orders that should be rejected per seed: median {s['orders_to_reject_per_seed']['median']} "
+        f"(range {s['orders_to_reject_per_seed']['min']}-{s['orders_to_reject_per_seed']['max']}), "
+        f"of which orders with a fault of their own: median {s['orders_with_own_fault_per_seed']['median']} "
+        f"(range {s['orders_with_own_fault_per_seed']['min']}-{s['orders_with_own_fault_per_seed']['max']}).",
         f"With the rules removed, orders loaded equalled orders staged in every seed: {s['no_rules_orders_loaded_equals_staged']}.",
-        f"Load and check time per seed: median {s['load_seconds']['median']} s "
+        f"Load and check CPU time per seed: median {s['load_seconds']['median']} s "
         f"(range {s['load_seconds']['min']}-{s['load_seconds']['max']} s).",
         "",
     ]
