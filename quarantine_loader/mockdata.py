@@ -139,6 +139,22 @@ def generate(seed, customers=2000, orders=10000, per_kind=25, kinds=None):
     return ds
 
 
+def main(argv=None):
+    import argparse
+    p = argparse.ArgumentParser(prog="quarantine_loader.mockdata", description="Write mock customers.csv and orders.csv")
+    p.add_argument("--seed", type=int, default=1)
+    p.add_argument("--customers", type=int, default=2000)
+    p.add_argument("--orders", type=int, default=10000)
+    p.add_argument("--per-kind", type=int, default=25, help="rows injected per fault kind")
+    p.add_argument("--clean", action="store_true", help="inject nothing")
+    p.add_argument("--out", required=True)
+    a = p.parse_args(argv)
+    ds = generate(a.seed, a.customers, a.orders, a.per_kind, kinds=[] if a.clean else None)
+    write_csv(ds, a.out)
+    print(f"wrote {len(ds.customers)} customers and {len(ds.orders)} orders to {a.out}; "
+          f"{len(ds.expected)} rows should be rejected")
+
+
 def write_csv(ds, folder):
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=True)
@@ -147,3 +163,7 @@ def write_csv(ds, folder):
             w = csv.writer(fh)
             w.writerow(head)
             w.writerows(rows)
+
+
+if __name__ == "__main__":
+    main()

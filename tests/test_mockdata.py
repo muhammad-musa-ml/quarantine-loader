@@ -60,6 +60,42 @@ class Generator(unittest.TestCase):
             mockdata.generate(1, kinds=["typo"], **SMALL)
 
 
+class Cli(unittest.TestCase):
+    def run_main(self, *args):
+        import contextlib
+        import io
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            mockdata.main([str(a) for a in args])
+        return buf.getvalue()
+
+    def test_clean_flag_writes_two_files_and_expects_no_rejects(self):
+        with tempfile.TemporaryDirectory() as d:
+            msg = self.run_main("--seed", 2, "--customers", 50, "--orders", 200, "--clean", "--out", d)
+            self.assertEqual(sorted(p.name for p in Path(d).iterdir()), ["customers.csv", "orders.csv"])
+            self.assertEqual(len(Path(d, "orders.csv").read_text(encoding="utf-8").splitlines()), 201)
+        self.assertIn("wrote 50 customers and 200 orders", msg)
+        self.assertTrue(msg.rstrip().endswith("0 rows should be rejected"))
+
+    def test_python_dash_m_really_runs_it(self):
+        import subprocess
+        import sys
+        with tempfile.TemporaryDirectory() as d:
+            r = subprocess.run([sys.executable, "-m", "quarantine_loader.mockdata", "--customers", "30",
+                                "--orders", "100", "--per-kind", "2", "--out", d],
+                               cwd=Path(__file__).resolve().parent.parent, capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stderr)
+            self.assertTrue(Path(d, "orders.csv").exists())
+        self.assertIn("rows should be rejected", r.stdout)
+
+    def test_default_run_injects_faults_and_says_how_many_rows_should_be_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            msg = self.run_main("--seed", 2, "--customers", 200, "--orders", 1000, "--per-kind", 4, "--out", d)
+        ds = mockdata.generate(2, customers=200, orders=1000, per_kind=4)
+        self.assertIn(f"{len(ds.expected)} rows should be rejected", msg)
+        self.assertGreater(len(ds.expected), 0)
+
+
 class AgainstTheLoader(unittest.TestCase):
     def test_clean_data_loads_whole_with_nothing_quarantined(self):
         for seed in range(1, 6):
