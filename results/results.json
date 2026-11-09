@@ -1,0 +1,1747 @@
+{
+ "summary": {
+  "seeds": 20,
+  "kinds": {
+   "null_key": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "duplicate_key": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "orphan_customer": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "bad_status": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "negative_amount": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "text_amount": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "ship_before_order": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "customer_null_region": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "customer_bad_signup": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   },
+   "customer_duplicate": {
+    "injected": 500,
+    "caught": 500,
+    "exact": 500
+   }
+  },
+  "cascade_orders": {
+   "total": 5001,
+   "exact": 5001,
+   "per_seed": {
+    "median": 251.0,
+    "min": 214,
+    "max": 288
+   }
+  },
+  "missed": 0,
+  "wrong_rules": 0,
+  "unexpected": 0,
+  "rows_quarantined_per_seed": {
+   "median": 496.5,
+   "min": 463,
+   "max": 533
+  },
+  "bad_orders_per_seed": {
+   "median": 421.5,
+   "min": 388,
+   "max": 458
+  },
+  "no_rules_orders_loaded_equals_staged": true,
+  "load_seconds": {
+   "median": 1.593,
+   "min": 1.28,
+   "max": 1.894
+  }
+ },
+ "runs": [
+  {
+   "seed": 1,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9631
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 394
+   },
+   "bad_orders_in_input": 394,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 224,
+     "caught": 224,
+     "exact": 224
+    },
+    "expected_rows": 469,
+    "quarantined_rows": 469,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.447
+  },
+  {
+   "seed": 2,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9615
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 410
+   },
+   "bad_orders_in_input": 410,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 237,
+     "caught": 237,
+     "exact": 237
+    },
+    "expected_rows": 485,
+    "quarantined_rows": 485,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.463
+  },
+  {
+   "seed": 3,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9598
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 427
+   },
+   "bad_orders_in_input": 427,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 254,
+     "caught": 254,
+     "exact": 254
+    },
+    "expected_rows": 502,
+    "quarantined_rows": 502,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.32
+  },
+  {
+   "seed": 4,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9604
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 421
+   },
+   "bad_orders_in_input": 421,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 250,
+     "caught": 250,
+     "exact": 250
+    },
+    "expected_rows": 496,
+    "quarantined_rows": 496,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.485
+  },
+  {
+   "seed": 5,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9575
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 450
+   },
+   "bad_orders_in_input": 450,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 279,
+     "caught": 279,
+     "exact": 279
+    },
+    "expected_rows": 525,
+    "quarantined_rows": 525,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.626
+  },
+  {
+   "seed": 6,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9603
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 422
+   },
+   "bad_orders_in_input": 422,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 251,
+     "caught": 251,
+     "exact": 251
+    },
+    "expected_rows": 497,
+    "quarantined_rows": 497,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.692
+  },
+  {
+   "seed": 7,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9625
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 400
+   },
+   "bad_orders_in_input": 400,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 225,
+     "caught": 225,
+     "exact": 225
+    },
+    "expected_rows": 475,
+    "quarantined_rows": 475,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.433
+  },
+  {
+   "seed": 8,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9587
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 438
+   },
+   "bad_orders_in_input": 438,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 263,
+     "caught": 263,
+     "exact": 263
+    },
+    "expected_rows": 513,
+    "quarantined_rows": 513,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.622
+  },
+  {
+   "seed": 9,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9637
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 388
+   },
+   "bad_orders_in_input": 388,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 214,
+     "caught": 214,
+     "exact": 214
+    },
+    "expected_rows": 463,
+    "quarantined_rows": 463,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.546
+  },
+  {
+   "seed": 10,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9608
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 417
+   },
+   "bad_orders_in_input": 417,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 244,
+     "caught": 244,
+     "exact": 244
+    },
+    "expected_rows": 492,
+    "quarantined_rows": 492,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.595
+  },
+  {
+   "seed": 11,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9604
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 421
+   },
+   "bad_orders_in_input": 421,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 251,
+     "caught": 251,
+     "exact": 251
+    },
+    "expected_rows": 496,
+    "quarantined_rows": 496,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.743
+  },
+  {
+   "seed": 12,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9615
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 410
+   },
+   "bad_orders_in_input": 410,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 235,
+     "caught": 235,
+     "exact": 235
+    },
+    "expected_rows": 485,
+    "quarantined_rows": 485,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.591
+  },
+  {
+   "seed": 13,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9567
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 458
+   },
+   "bad_orders_in_input": 458,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 288,
+     "caught": 288,
+     "exact": 288
+    },
+    "expected_rows": 533,
+    "quarantined_rows": 533,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.796
+  },
+  {
+   "seed": 14,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9616
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 409
+   },
+   "bad_orders_in_input": 409,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 235,
+     "caught": 235,
+     "exact": 235
+    },
+    "expected_rows": 484,
+    "quarantined_rows": 484,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.822
+  },
+  {
+   "seed": 15,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9571
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 454
+   },
+   "bad_orders_in_input": 454,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 281,
+     "caught": 281,
+     "exact": 281
+    },
+    "expected_rows": 529,
+    "quarantined_rows": 529,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.894
+  },
+  {
+   "seed": 16,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9622
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 403
+   },
+   "bad_orders_in_input": 403,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 228,
+     "caught": 228,
+     "exact": 228
+    },
+    "expected_rows": 478,
+    "quarantined_rows": 478,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.567
+  },
+  {
+   "seed": 17,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9599
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 426
+   },
+   "bad_orders_in_input": 426,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 255,
+     "caught": 255,
+     "exact": 255
+    },
+    "expected_rows": 501,
+    "quarantined_rows": 501,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.75
+  },
+  {
+   "seed": 18,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9595
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 430
+   },
+   "bad_orders_in_input": 430,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 260,
+     "caught": 260,
+     "exact": 260
+    },
+    "expected_rows": 505,
+    "quarantined_rows": 505,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.663
+  },
+  {
+   "seed": 19,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9580
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 445
+   },
+   "bad_orders_in_input": 445,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 275,
+     "caught": 275,
+     "exact": 275
+    },
+    "expected_rows": 520,
+    "quarantined_rows": 520,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.561
+  },
+  {
+   "seed": 20,
+   "rows_staged": {
+    "customers": 2025,
+    "orders": 10025
+   },
+   "rows_loaded": {
+    "customers": 1950,
+    "orders": 9603
+   },
+   "rows_quarantined": {
+    "customers": 75,
+    "orders": 422
+   },
+   "bad_orders_in_input": 422,
+   "no_rules_loaded_orders": 10025,
+   "no_rules_staged_orders": 10025,
+   "compare": {
+    "kinds": {
+     "bad_status": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_bad_signup": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_duplicate": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "customer_null_region": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "duplicate_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "negative_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "null_key": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "orphan_customer": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "ship_before_order": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     },
+     "text_amount": {
+      "injected": 25,
+      "caught": 25,
+      "exact": 25
+     }
+    },
+    "cascade": {
+     "orders": 252,
+     "caught": 252,
+     "exact": 252
+    },
+    "expected_rows": 497,
+    "quarantined_rows": 497,
+    "unexpected": [],
+    "missed": [],
+    "wrong_rules": []
+   },
+   "load_seconds": 1.28
+  }
+ ]
+}
