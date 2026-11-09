@@ -4,7 +4,9 @@ import json
 import re
 from pathlib import Path
 
-NAME = re.compile(r"^[a-z_][a-z0-9_]*$")
+NAME = re.compile(r"[a-z_][a-z0-9_]*")
+# tables the loader itself creates; an entity with one of these names would overwrite them
+RESERVED = {"quarantine", "rule_results", "entity_results"}
 COLUMN_TYPES = {"text", "integer", "real", "date"}
 CHECKED_TYPES = {"integer", "real", "date"}
 SEVERITIES = {"blocking", "warn"}
@@ -40,11 +42,14 @@ def _need(cond, where, msg):
 
 def check_entity(cfg, where):
     _need(isinstance(cfg, dict), where, "top level must be an object")
-    _need(NAME.match(str(cfg.get("entity", ""))), where, "entity must be a lowercase identifier")
+    name = str(cfg.get("entity", ""))
+    _need(NAME.fullmatch(name), where, "entity must be a lowercase identifier")
+    _need(name not in RESERVED and not name.startswith("stg_"), where,
+          f"entity name {name!r} is reserved (the loader's own tables, and stg_*)")
     cols = cfg.get("columns")
     _need(isinstance(cols, dict) and cols, where, "columns must be a non-empty object")
     for c, t in cols.items():
-        _need(NAME.match(c), where, f"column name {c!r} is not a lowercase identifier")
+        _need(NAME.fullmatch(c), where, f"column name {c!r} is not a lowercase identifier")
         _need(t in COLUMN_TYPES, where, f"column {c} has type {t!r}, expected one of {sorted(COLUMN_TYPES)}")
     _need(cfg.get("key") in cols, where, "key must name a column")
     rules = cfg.get("rules", [])
@@ -63,7 +68,8 @@ def check_rule(r, cfg, where):
     r.setdefault("severity", "blocking")
     _need(r["severity"] in SEVERITIES, where, f"severity must be one of {sorted(SEVERITIES)}")
     if kind in COLUMN_RULES:
-        _need(r.get("column") in cfg["columns"], where, "column must be a column of this entity")
+        col = r.get("column")
+        _need(isinstance(col, str) and col in cfg["columns"], where, "column must be a column of this entity")
     if kind == "accepted_values":
         v = r.get("values")
         _need(isinstance(v, list) and v and all(isinstance(x, str) for x in v), where,
@@ -82,7 +88,7 @@ def check_rule(r, cfg, where):
         ref = r.get("to")
         _need(isinstance(ref, str) and ref.count(".") == 1, where, "to must look like entity.column")
         ent, col = ref.split(".")
-        _need(NAME.match(ent) and NAME.match(col), where, "to must look like entity.column")
+        _need(NAME.fullmatch(ent) and NAME.fullmatch(col), where, "to must look like entity.column")
         _need(ent != cfg["entity"], where, "a foreign key to the same entity is not supported")
     elif kind == "expr":
         _need(isinstance(r.get("sql"), str) and r["sql"].strip(), where, "expr needs a sql string")

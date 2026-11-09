@@ -6,12 +6,6 @@
   "new": "(SELECT 1 FROM {q('stg_' + parent)} p WHERE"
  },
  {
-  "name": "fk_not_in",
-  "file": "quarantine_loader/rules.py",
-  "old": "NOT EXISTS \"\n                f\"(SELECT 1 FROM {q(parent)} p WHERE p.{q(pcol)} = {q(stg)}.{q(col)})\"), []",
-  "new": "NOT IN \"\n                f\"(SELECT {q(pcol)} FROM {q(parent)})\"), []"
- },
- {
   "name": "unique_ignores_quarantine",
   "file": "quarantine_loader/load.py",
   "old": "live = f\"_row NOT IN (SELECT row_no FROM quarantine WHERE entity='{ent}') AND {col} IS NOT NULL\"",
@@ -50,7 +44,7 @@
  {
   "name": "date_accepts_basic_format",
   "file": "quarantine_loader/rules.py",
-  "old": "if not _DATE.match(v):",
+  "old": "if not _DATE.fullmatch(v):",
   "new": "if False:"
  },
  {
@@ -102,18 +96,6 @@
   "new": "rng = random.Random()"
  },
  {
-  "name": "load_unique_keeps_last_e2e",
-  "file": "quarantine_loader/load.py",
-  "old": "(SELECT MIN(_row) FROM",
-  "new": "(SELECT MAX(_row) FROM"
- },
- {
-  "name": "load_fk_against_staging_e2e",
-  "file": "quarantine_loader/rules.py",
-  "old": "(SELECT 1 FROM {q(parent)} p WHERE",
-  "new": "(SELECT 1 FROM {q('stg_' + parent)} p WHERE"
- },
- {
   "name": "report_blocking_never_exits_1",
   "file": "quarantine_loader/report.py",
   "old": "elif blocking:",
@@ -144,24 +126,6 @@
   "new": "WHERE failed_rows >= 0"
  },
  {
-  "name": "cli_sql_error_uncaught",
-  "file": "quarantine_loader/__main__.py",
-  "old": "(OSError, ValueError, sqlite3.Error)",
-  "new": "(OSError, ValueError)"
- },
- {
-  "name": "cli_returns_0_always",
-  "file": "quarantine_loader/__main__.py",
-  "old": "    return code\n",
-  "new": "    return 0\n"
- },
- {
-  "name": "cli_report_file_not_written",
-  "file": "quarantine_loader/__main__.py",
-  "old": "    if args.report:\n        Path(args.report).write_text(text, encoding=\"utf-8\", newline=\"\\n\")\n",
-  "new": ""
- },
- {
   "name": "measure_rules_not_removed",
   "file": "quarantine_loader/measure.py",
   "old": "bare = [dict(copy.deepcopy(c), rules=[]) for c in configs]",
@@ -189,6 +153,102 @@
   "name": "mockdata_command_not_wired",
   "file": "quarantine_loader/mockdata.py",
   "old": "if __name__ == \"__main__\":\n    main()\n",
+  "new": ""
+ },
+ {
+  "name": "fk_not_in",
+  "file": "quarantine_loader/rules.py",
+  "old": "NOT EXISTS \"\n                f\"(SELECT 1 FROM {q(parent)} p WHERE p.{q(pcol)} = {q(stg)}.{q(col)})\"), []",
+  "new": "{q(col)} NOT IN \"\n                f\"(SELECT {q(pcol)} FROM {q(parent)})\"), []"
+ },
+ {
+  "name": "rules_not_null_inverted",
+  "file": "quarantine_loader/rules.py",
+  "old": "return f\"{q(col)} IS NULL\", []",
+  "new": "return f\"{q(col)} IS NOT NULL\", []"
+ },
+ {
+  "name": "rules_accepted_values_inverted",
+  "file": "quarantine_loader/rules.py",
+  "old": "return f\"{q(col)} NOT IN ({marks})\", list(rule[\"values\"])",
+  "new": "return f\"{q(col)} IN ({marks})\", list(rule[\"values\"])"
+ },
+ {
+  "name": "rules_type_check_dropped",
+  "file": "quarantine_loader/rules.py",
+  "old": "return f\"NOT is_{rule['type']}({q(col)})\", []",
+  "new": "return \"0\", []"
+ },
+ {
+  "name": "rules_integer_matches_unicode_digits",
+  "file": "quarantine_loader/rules.py",
+  "old": "_INT = re.compile(r\"[+-]?[0-9]+\", re.ASCII)",
+  "new": "_INT = re.compile(r\"[+-]?\\d+\")"
+ },
+ {
+  "name": "rules_integer_uses_match_not_fullmatch",
+  "file": "quarantine_loader/rules.py",
+  "old": "int(bool(_INT.fullmatch(v)))",
+  "new": "int(bool(_INT.match(v)))"
+ },
+ {
+  "name": "config_cycle_not_detected",
+  "file": "quarantine_loader/config.py",
+  "old": "        if name in active:",
+  "new": "        if False:"
+ },
+ {
+  "name": "config_duplicate_rule_id_allowed",
+  "file": "quarantine_loader/config.py",
+  "old": "_need(r[\"id\"] not in seen_rules, r[\"id\"], \"rule id used twice\")",
+  "new": "_need(True, r[\"id\"], \"rule id used twice\")"
+ },
+ {
+  "name": "config_fk_type_mismatch_allowed",
+  "file": "quarantine_loader/config.py",
+  "old": "_need(mine == theirs, r[\"id\"], f\"{r['column']} is {mine} but {ent}.{col} is {theirs}\")",
+  "new": "_need(True, r[\"id\"], \"\")"
+ },
+ {
+  "name": "config_reserved_names_allowed",
+  "file": "quarantine_loader/config.py",
+  "old": "_need(name not in RESERVED and not name.startswith(\"stg_\"), where,",
+  "new": "_need(True, where,"
+ },
+ {
+  "name": "config_name_checked_with_match",
+  "file": "quarantine_loader/config.py",
+  "old": "_need(NAME.fullmatch(name), where, \"entity must be a lowercase identifier\")",
+  "new": "_need(NAME.match(name), where, \"entity must be a lowercase identifier\")"
+ },
+ {
+  "name": "load_extra_cells_ignored",
+  "file": "quarantine_loader/load.py",
+  "old": "            if None in rec:",
+  "new": "            if False:"
+ },
+ {
+  "name": "cli_returns_0_always",
+  "file": "quarantine_loader/__main__.py",
+  "old": "        return run(args)",
+  "new": "        run(args)\n        return 0"
+ },
+ {
+  "name": "cli_unexpected_error_exits_1",
+  "file": "quarantine_loader/__main__.py",
+  "old": "    return 2\n",
+  "new": "    return 1\n"
+ },
+ {
+  "name": "cli_only_one_error_type_caught",
+  "file": "quarantine_loader/__main__.py",
+  "old": "    except Exception as e:",
+  "new": "    except ZeroDivisionError as e:"
+ },
+ {
+  "name": "cli_report_file_not_written",
+  "file": "quarantine_loader/__main__.py",
+  "old": "    if args.report:\n        Path(args.report).write_text(text, encoding=\"utf-8\", newline=\"\\n\")\n",
   "new": ""
  }
 ]

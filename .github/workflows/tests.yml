@@ -1,5 +1,7 @@
 name: tests
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,6 +18,9 @@ jobs:
       - name: faulty data must load with exit 1
         run: |
           python -m quarantine_loader.mockdata --seed 1 --out faulty
-          python -m quarantine_loader --config config --data faulty --report report.md || test $? -eq 1
+          code=0
+          python -m quarantine_loader --config config --data faulty --report report.md || code=$?
+          echo "exit status: $code"
+          test "$code" -eq 1
       - name: rules catch every injected fault over five seeds
         run: python -m quarantine_loader.measure --seeds 5 --out "$RUNNER_TEMP/results"

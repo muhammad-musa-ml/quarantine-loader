@@ -94,9 +94,40 @@ class OneRulePerCase(Case):
         self.assertEqual(self.quarantined("orders"), {3: "o.amount.range", 4: "o.amount.range"})
         self.assertEqual(self.loaded_ids(), ["O1", "O2"])
 
-    def test_accepted_values_does_not_judge_a_null(self):
+    def test_accepted_values_does_not_judge_a_null_and_an_empty_cell_is_a_null(self):
         self.go(self.base_customers, [order("O1", st="shiped"), order("O2", st="")])
         self.assertEqual(self.quarantined("orders"), {1: "o.status.ok"})
+        self.assertEqual(self.q("SELECT order_id, status IS NULL FROM orders"), [("O2", 1)])
+
+    def test_a_row_that_fails_only_a_warn_rule_is_quarantined_and_not_loaded(self):
+        cfg = dict(ORDERS)
+        cfg["rules"] = [{"id": "o.status.ok", "kind": "accepted_values", "column": "status",
+                         "values": ["placed"], "severity": "warn"}]
+        self.configs = [config.check_entity(CUSTOMERS, "c"), config.check_entity(cfg, "o")]
+        res = self.go(self.base_customers, [order("O1", st="shiped"), order("O2")])
+        self.assertEqual((res[1]["staged"], res[1]["loaded"], res[1]["quarantined"]), (2, 1, 1))
+        self.assertEqual(self.q("SELECT severity FROM quarantine WHERE entity='orders'"), [("warn",)])
+
+    def test_unique_does_not_treat_null_keys_as_repeats_when_nothing_else_rejects_them(self):
+        loose = {"entity": "orders", "key": "order_id", "columns": {"order_id": "text", "amount": "real"},
+                 "rules": [{"id": "o.id.unique", "kind": "unique", "column": "order_id"}]}
+        self.configs = [config.check_entity(loose, "o")]
+        self.write("orders", ["order_id", "amount"], [["", "1"], ["", "2"], ["A", "3"], ["A", "4"]])
+        res = load.run(self.conn, self.configs, self.dir)
+        self.assertEqual((res[0]["loaded"], res[0]["quarantined"]), (3, 1))
+        self.assertEqual(self.quarantined("orders"), {4: "o.id.unique"})
+
+    def test_a_row_with_more_cells_than_the_header_stops_the_load_with_its_row_number(self):
+        (self.dir / "customers.csv").write_text("customer_id,region\nC1,north,extra\n", encoding="utf-8")
+        with self.assertRaises(ValueError) as cm:
+            load.run(self.conn, self.configs, self.dir)
+        self.assertIn("customers.csv data row 1 has more cells than the header", str(cm.exception))
+
+    def test_a_short_row_gets_nulls_for_the_missing_cells(self):
+        (self.dir / "customers.csv").write_text("customer_id,region\nC1\n", encoding="utf-8")
+        (self.dir / "orders.csv").write_text(",".join(OHEAD) + "\n", encoding="utf-8")
+        load.run(self.conn, self.configs, self.dir)
+        self.assertEqual(self.quarantined("customers"), {1: "c.region.not_null"})
 
     def test_dates_must_be_real_calendar_days(self):
         self.go(self.base_customers, [order("O1", od="2026-02-30", sd=""), order("O2", od="20260110", sd=""),
@@ -115,6 +146,13 @@ class OneRulePerCase(Case):
         self.configs = [config.check_entity(CUSTOMERS, "c"), config.check_entity(cfg, "o")]
         self.go(self.base_customers, [order("O1", amt="99.5"), order("O2", amt="100")])
         self.assertEqual(self.quarantined("orders"), {2: "o.big"})
+
+    def test_expr_compares_text_as_text_so_an_uncast_number_comparison_rejects(self):
+        cfg = dict(ORDERS)
+        cfg["rules"] = [{"id": "o.big", "kind": "expr", "sql": "amount < 100"}]
+        self.configs = [config.check_entity(CUSTOMERS, "c"), config.check_entity(cfg, "o")]
+        self.go(self.base_customers, [order("O1", amt="99.5")])
+        self.assertEqual(self.quarantined("orders"), {1: "o.big"})
 
     def test_text_keys_keep_their_leading_zeros(self):
         self.go([["007", "north"]], [order("O1", "007")])
@@ -199,6 +237,15 @@ class Rerun(Case):
 
 
 class SqlFunctions(unittest.TestCase):
+    def test_validators_are_ascii_only_and_refuse_a_trailing_newline(self):
+        # "٣" is an Arabic-Indic digit: \d matches it and SQLite's CAST reads it as 0
+        for fn, good in ((rules.is_integer, "5"), (rules.is_real, "5.5"), (rules.is_date, "2026-01-01")):
+            self.assertEqual(fn(good), 1)
+            self.assertEqual(fn(good + "\n"), 0, fn.__name__)
+        self.assertEqual(rules.is_integer("٣"), 0)
+        self.assertEqual(rules.is_real("٣.5"), 0)
+        self.assertEqual(rules.is_date("٢٠٢٦-01-01"), 0)
+
     def test_validators(self):
         self.assertEqual([rules.is_integer(v) for v in ("12", "-3", "1.0", "", "1e3", None)], [1, 1, 0, 0, 0, None])
         self.assertEqual([rules.is_real(v) for v in ("1", "1.5", ".5", "1e3", "nan", "inf", "12.5x", None)],

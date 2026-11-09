@@ -90,7 +90,9 @@ def summarize(runs):
 def markdown(s, customers, orders, per_kind):
     n = s["seeds"]
     lines = [
-        f"{n} seeds; each run has {customers} customers and {orders} orders, with {per_kind} rows of each fault kind injected.",
+        f"{n} seeds; each run starts from {customers} customers and {orders} orders and injects {per_kind} rows of each "
+        f"fault kind. The duplicate rows are appended, so a run stages {customers + per_kind} customers and "
+        f"{orders + per_kind} orders.",
         "",
         "| fault kind | injected | rejected | rejected by exactly the expected rules |",
         "|---|---:|---:|---:|",
@@ -101,7 +103,8 @@ def markdown(s, customers, orders, per_kind):
     lines += [
         "",
         f"Orders whose customer was rejected: {c['total']} in all, {c['per_seed']['median']} per seed "
-        f"(range {c['per_seed']['min']}-{c['per_seed']['max']}); {c['exact']} were rejected by the foreign-key rule.",
+        f"(range {c['per_seed']['min']}-{c['per_seed']['max']}); {c['exact']} were rejected by exactly the expected "
+        f"rules, the foreign-key rule among them.",
         f"Expected rows not rejected: {s['missed']}. Rejected by the wrong rules: {s['wrong_rules']}. "
         f"Rejected but not expected: {s['unexpected']}.",
         f"Rows quarantined per seed: median {s['rows_quarantined_per_seed']['median']} "
@@ -111,8 +114,8 @@ def markdown(s, customers, orders, per_kind):
         f"of which orders with a fault of their own: median {s['orders_with_own_fault_per_seed']['median']} "
         f"(range {s['orders_with_own_fault_per_seed']['min']}-{s['orders_with_own_fault_per_seed']['max']}).",
         f"With the rules removed, orders loaded equalled orders staged in every seed: {s['no_rules_orders_loaded_equals_staged']}.",
-        f"Load and check CPU time per seed: median {s['load_seconds']['median']} s "
-        f"(range {s['load_seconds']['min']}-{s['load_seconds']['max']} s).",
+        f"Load and check CPU time per seed: median {s['load_seconds']['median']:.2f} s "
+        f"(range {s['load_seconds']['min']:.2f}-{s['load_seconds']['max']:.2f} s).",
         "",
     ]
     return "\n".join(lines)

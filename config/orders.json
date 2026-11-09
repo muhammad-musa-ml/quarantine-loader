@@ -12,7 +12,10 @@
   "rules": [
     {"id": "orders.order_id.not_null", "kind": "not_null", "column": "order_id"},
     {"id": "orders.order_id.unique", "kind": "unique", "column": "order_id"},
+    {"id": "orders.customer_id.not_null", "kind": "not_null", "column": "customer_id"},
     {"id": "orders.customer_id.exists", "kind": "foreign_key", "column": "customer_id", "to": "customers.customer_id"},
+    {"id": "orders.order_date.type", "kind": "type", "column": "order_date", "type": "date"},
+    {"id": "orders.ship_date.type", "kind": "type", "column": "ship_date", "type": "date"},
     {"id": "orders.status.accepted", "kind": "accepted_values", "column": "status",
      "values": ["placed", "shipped", "delivered", "cancelled"], "severity": "warn"},
     {"id": "orders.amount.type", "kind": "type", "column": "amount", "type": "real"},

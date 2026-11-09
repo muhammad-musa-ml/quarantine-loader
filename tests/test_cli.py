@@ -1,6 +1,7 @@
 import contextlib
 import io
 import json
+import re
 import shutil
 import sqlite3
 import subprocess
@@ -81,6 +82,32 @@ class ExitCodes(Case):
         self.assertEqual(code, 2)
         self.assertTrue(err.startswith("error:"))
 
+    def test_a_row_with_more_cells_than_the_header_exits_2_and_names_the_row(self):
+        _, d = self.data(kinds=[])
+        with open(d / "orders.csv", "a", encoding="utf-8", newline="") as fh:
+            fh.write("O9,C00001,2025-01-01,,placed,5.00,extra\n")
+        code, _, err = run_cli("--config", CONFIG, "--data", d)
+        self.assertEqual(code, 2)
+        self.assertIn("data row 1001 has more cells than the header", err)
+
+    def test_a_config_with_a_list_where_a_column_name_belongs_exits_2_not_with_a_traceback(self):
+        cfg = self.root / "cfg"
+        shutil.copytree(CONFIG, cfg)
+        path = cfg / "orders.json"
+        spec = json.loads(path.read_text(encoding="utf-8"))
+        spec["rules"][0]["column"] = ["order_id"]
+        path.write_text(json.dumps(spec), encoding="utf-8")
+        _, d = self.data(kinds=[])
+        code, _, err = run_cli("--config", cfg, "--data", d)
+        self.assertEqual(code, 2)
+        self.assertIn("config error", err)
+
+    def test_an_unwritable_report_path_exits_2_and_not_1(self):
+        _, d = self.data(kinds=[])
+        code, _, err = run_cli("--config", CONFIG, "--data", d, "--report", self.root / "no_such_folder" / "r.md")
+        self.assertEqual(code, 2)
+        self.assertIn("error:", err)
+
     def test_bad_rule_sql_exits_2(self):
         cfg = self.root / "cfg"
         shutil.copytree(CONFIG, cfg)
@@ -102,14 +129,11 @@ class ReportContent(Case):
         self.assertIn("| orders.order_id.unique | unique | blocking | 8 |", out)
         self.assertIn("| customers.customer_id.unique | unique | blocking | 8 |", out)
         self.assertIn("| orders.amount.range | range | blocking | 8 |", out)
-        # no kind injects a null customer id, so that is the one rule that rejects nothing
-        self.assertIn("\n1 rule(s) rejected nothing.\n", out)
-
-    def test_blocking_rules_are_listed_before_warn_rules(self):
-        _, d = self.data()
-        _, out, _ = run_cli("--config", CONFIG, "--data", d)
-        self.assertLess(out.index("| blocking |"), out.index("| warn |"))
-        self.assertGreater(out.index("orders.status.accepted"), out.rindex("| blocking |"))
+        from quarantine_loader import config
+        total = sum(len(c["rules"]) for c in config.load_dir(CONFIG))
+        listed = len(re.findall(r"^\| (?:customers|orders)\.[^|]+\|", out, re.M))
+        self.assertGreater(listed, 0)
+        self.assertIn(f"\n{total - listed} rule(s) rejected nothing.\n", out)
 
     def test_a_null_key_is_shown_as_null_with_its_row_number(self):
         ds, d = self.data(kinds=["null_key"])

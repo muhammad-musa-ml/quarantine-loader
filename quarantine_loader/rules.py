@@ -3,23 +3,24 @@
 import datetime
 import re
 
-_INT = re.compile(r"^[+-]?\d+$")
-_REAL = re.compile(r"^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$")
-_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+# fullmatch and ASCII: "$" accepts a trailing newline and "\d" accepts digits SQLite's CAST reads as 0
+_INT = re.compile(r"[+-]?[0-9]+", re.ASCII)
+_REAL = re.compile(r"[+-]?([0-9]+(\.[0-9]*)?|\.[0-9]+)([eE][+-]?[0-9]+)?", re.ASCII)
+_DATE = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}", re.ASCII)
 
 
 def is_integer(v):
-    return None if v is None else int(bool(_INT.match(v)))
+    return None if v is None else int(bool(_INT.fullmatch(v)))
 
 
 def is_real(v):
-    return None if v is None else int(bool(_REAL.match(v)))
+    return None if v is None else int(bool(_REAL.fullmatch(v)))
 
 
 def is_date(v):
     if v is None:
         return None
-    if not _DATE.match(v):
+    if not _DATE.fullmatch(v):
         return 0
     try:
         datetime.date.fromisoformat(v)

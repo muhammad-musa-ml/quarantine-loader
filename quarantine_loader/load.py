@@ -57,6 +57,9 @@ def stage(conn, cfg, csv_path):
             raise ValueError(f"{Path(csv_path).name} has no column {', '.join(missing)}")
         marks = ",".join("?" for _ in cols)
         for n, rec in enumerate(reader, start=1):
+            if None in rec:
+                # DictReader keeps the cells past the header under the key None
+                raise ValueError(f"{Path(csv_path).name} data row {n} has more cells than the header")
             conn.execute(f"INSERT INTO stg_{ent} VALUES (?,{marks})", [n] + [rec[c] if rec[c] != "" else None for c in cols])
     return conn.execute(f"SELECT COUNT(*) FROM stg_{ent}").fetchone()[0]
 

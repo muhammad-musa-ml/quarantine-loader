@@ -47,6 +47,18 @@ class EntityChecks(unittest.TestCase):
         self.bad(entity(columns={"id": "text", "n; drop table x": "text"}), "not a lowercase identifier")
         self.bad(entity(name="Things"), "entity must be a lowercase identifier")
 
+    def test_a_trailing_newline_is_not_a_valid_name(self):
+        self.bad(entity(name="things\n"), "entity must be a lowercase identifier")
+        self.bad(entity(columns={"id": "text", "n\n": "integer"}), "is not a lowercase identifier")
+
+    def test_names_the_loader_uses_for_its_own_tables_are_reserved(self):
+        for name in ("quarantine", "rule_results", "entity_results", "stg_orders"):
+            self.bad(entity(name=name), "is reserved")
+
+    def test_a_column_given_as_a_list_is_a_config_error(self):
+        self.bad(entity(rules=[{"id": "r", "kind": "not_null", "column": ["n"]}]),
+                 "column must be a column of this entity")
+
     def test_rule_must_name_a_column_of_its_entity(self):
         r = {"id": "r1", "kind": "not_null", "column": "missing"}
         self.bad(entity(rules=[r]), "column must be a column of this entity")

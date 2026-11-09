@@ -1,15 +1,29 @@
 """python -m quarantine_loader --config config --data data [--db out.db] [--report report.md]
 
 Exit status: 0 nothing blocking was rejected, 1 a blocking rule rejected rows,
-2 a config or CSV could not be read, 3 the load does not reconcile.
+2 the load could not be completed (a config, CSV or rule SQL that cannot be
+read, or a file that cannot be written), 3 the load does not reconcile.
 """
 
 import argparse
-import sqlite3
 import sys
 from pathlib import Path
 
 from . import config, load, report
+
+
+def run(args):
+    configs = config.load_dir(args.config)
+    conn = load.connect(args.db)
+    try:
+        load.run(conn, configs, args.data)
+        text, code = report.build(conn)
+    finally:
+        conn.close()
+    print(text, end="")
+    if args.report:
+        Path(args.report).write_text(text, encoding="utf-8", newline="\n")
+    return code
 
 
 def main(argv=None):
@@ -20,22 +34,12 @@ def main(argv=None):
     p.add_argument("--report", help="write the report here as well as printing it")
     args = p.parse_args(argv)
     try:
-        configs = config.load_dir(args.config)
-        conn = load.connect(args.db)
-        try:
-            load.run(conn, configs, args.data)
-        except (OSError, ValueError, sqlite3.Error) as e:
-            print(f"error: {e}", file=sys.stderr)
-            return 2
-        text, code = report.build(conn)
-        conn.close()
+        return run(args)
     except config.ConfigError as e:
         print(f"config error: {e}", file=sys.stderr)
-        return 2
-    print(text, end="")
-    if args.report:
-        Path(args.report).write_text(text, encoding="utf-8", newline="\n")
-    return code
+    except Exception as e:  # exit 1 means "a rule rejected rows", so any other failure must not look like it
+        print(f"error: {type(e).__name__}: {e}", file=sys.stderr)
+    return 2
 
 
 if __name__ == "__main__":
