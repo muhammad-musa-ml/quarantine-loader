@@ -1,0 +1,23 @@
+{
+  "entity": "orders",
+  "key": "order_id",
+  "columns": {
+    "order_id": "text",
+    "customer_id": "text",
+    "order_date": "date",
+    "ship_date": "date",
+    "status": "text",
+    "amount": "real"
+  },
+  "rules": [
+    {"id": "orders.order_id.not_null", "kind": "not_null", "column": "order_id"},
+    {"id": "orders.order_id.unique", "kind": "unique", "column": "order_id"},
+    {"id": "orders.customer_id.exists", "kind": "foreign_key", "column": "customer_id", "to": "customers.customer_id"},
+    {"id": "orders.status.accepted", "kind": "accepted_values", "column": "status",
+     "values": ["placed", "shipped", "delivered", "cancelled"], "severity": "warn"},
+    {"id": "orders.amount.type", "kind": "type", "column": "amount", "type": "real"},
+    {"id": "orders.amount.range", "kind": "range", "column": "amount", "min": 0},
+    {"id": "orders.ship_after_order", "kind": "expr", "sql": "ship_date IS NULL OR ship_date >= order_date",
+     "severity": "warn"}
+  ]
+}

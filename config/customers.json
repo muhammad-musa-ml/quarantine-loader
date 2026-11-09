@@ -1,0 +1,15 @@
+{
+  "entity": "customers",
+  "key": "customer_id",
+  "columns": {
+    "customer_id": "text",
+    "region": "text",
+    "signup_date": "date"
+  },
+  "rules": [
+    {"id": "customers.customer_id.not_null", "kind": "not_null", "column": "customer_id"},
+    {"id": "customers.customer_id.unique", "kind": "unique", "column": "customer_id"},
+    {"id": "customers.region.not_null", "kind": "not_null", "column": "region"},
+    {"id": "customers.signup_date.type", "kind": "type", "column": "signup_date", "type": "date"}
+  ]
+}
