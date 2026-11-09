@@ -85,6 +85,13 @@ class SetChecks(unittest.TestCase):
             config.check_set([a, b])
         self.assertIn("b has no column nope", str(cm.exception))
 
+    def test_foreign_key_columns_must_have_the_same_type(self):
+        a = config.check_entity(entity("a", rules=[fk("a.fk", "b.n")]), "a.json")
+        b = config.check_entity(entity("b"), "b.json")
+        with self.assertRaises(config.ConfigError) as cm:
+            config.check_set([a, b])
+        self.assertIn("id is text but b.n is integer", str(cm.exception))
+
     def test_duplicate_rule_id_across_files(self):
         r = {"id": "same", "kind": "not_null", "column": "n"}
         a = config.check_entity(entity("a", rules=[dict(r)]), "a.json")

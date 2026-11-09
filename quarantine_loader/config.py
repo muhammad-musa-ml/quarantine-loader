@@ -105,6 +105,8 @@ def check_set(configs):
             ent, col = r["to"].split(".")
             _need(ent in by_name, r["id"], f"foreign key points at unknown entity {ent}")
             _need(col in by_name[ent]["columns"], r["id"], f"{ent} has no column {col}")
+            mine, theirs = cfg["columns"][r["column"]], by_name[ent]["columns"][col]
+            _need(mine == theirs, r["id"], f"{r['column']} is {mine} but {ent}.{col} is {theirs}")
 
 
 def dependencies(cfg):
